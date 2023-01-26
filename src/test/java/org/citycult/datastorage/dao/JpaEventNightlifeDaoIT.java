@@ -1,0 +1,150 @@
+package org.citycult.datastorage.dao;
+
+import junit.framework.Assert;
+import org.citycult.datastorage.entity.Category;
+import org.citycult.datastorage.entity.JpaEntityFactory;
+import org.citycult.datastorage.entity.JpaEventNightlife;
+import org.citycult.datastorage.entity.JpaVenue;
+import org.junit.Test;
+
+import java.util.List;
+
+/**
+ * @author cpieloth
+ */
+public class JpaEventNightlifeDaoIT {
+
+    private static final JpaEntityFactory edf = new JpaEntityFactory();
+    private static final JpaEventNightlifeDao dao = JpaEntityDaoFactory.getInstance().getEventNightlifeDao();
+    private static final String event_bname = "Test Event Nightlife";
+    private static final String venue_bname = "Test Venue";
+
+    @Test
+    public void getAll() {
+        JpaEventNightlife event;
+        JpaVenue venue;
+
+        event = edf.createEventNightLife();
+        event.setName("Test Event1");
+        venue = edf.createVenue();
+        venue.setName("Test Venue1");
+        event.setVenue(venue);
+        Assert.assertNotNull(dao.insert(event));
+
+        event = edf.createEventNightLife();
+        event.setName("Test Event2");
+        venue = edf.createVenue();
+        venue.setName("Test Venue2");
+        event.setVenue(venue);
+        Assert.assertNotNull(dao.insert(event));
+
+        List<JpaEventNightlife> events = dao.getAll();
+        Assert.assertNotNull(events);
+        Assert.assertTrue(events.size() >= 2);
+    }
+
+    @Test
+    public void find() {
+        JpaEventNightlife event;
+        JpaVenue venue;
+
+        event = edf.createEventNightLife();
+        event.setName("Test Event");
+        venue = edf.createVenue();
+        venue.setName("Test Venue");
+        event.setVenue(venue);
+
+        Assert.assertNotNull(dao.insert(event));
+
+        List<JpaEventNightlife> finds = dao.find(event);
+        Assert.assertNotNull(finds);
+        Assert.assertTrue(finds.size() == 1);
+    }
+
+    @Test
+    public void insertGet() {
+        JpaEventNightlife event;
+        JpaVenue venue;
+
+        event = edf.createEventNightLife();
+        event.setName("Test Event");
+
+        Assert.assertNull(dao.insert(event)); // no venue!
+
+        venue = edf.createVenue();
+        venue.setName("Test Venue");
+        event.setVenue(venue);
+
+        Assert.assertNotNull(dao.insert(event));
+        Assert.assertNotNull(dao.get(event.getEventUid()));
+    }
+
+    @Test
+    public void update() {
+        JpaEventNightlife event;
+        JpaVenue venue;
+
+        event = edf.createEventNightLife();
+        event.setName("Test Event");
+        venue = edf.createVenue();
+        venue.setName("Test Venue");
+        event.setVenue(venue);
+
+        Assert.assertNotNull(dao.insert(event));
+
+        final String newName = event.getName() + " UPDATED";
+        event.setName(newName);
+
+        Assert.assertNotNull(dao.update(event));
+
+        event = dao.get(event.getEventUid());
+        Assert.assertNotNull(event);
+        Assert.assertEquals(newName, event.getName());
+    }
+
+    @Test
+    public void delete() {
+        JpaEventNightlife event;
+        JpaVenue venue;
+
+        event = edf.createEventNightLife();
+        event.setName("Test Event");
+        venue = edf.createVenue();
+        venue.setName("Test Venue Cinema");
+        event.setVenue(venue);
+
+        Assert.assertNotNull(dao.insert(event));
+        event = dao.get(event.getEventUid());
+        Assert.assertNotNull(event);
+
+        Assert.assertTrue(dao.delete(event));
+        event = dao.get(event.getEventUid());
+        Assert.assertNull(event);
+    }
+
+    @Test
+    public void getForVenue() {
+        JpaEventNightlife event;
+        JpaVenue venue;
+        venue = edf.createVenue();
+        venue.setName("Test Venue");
+
+        event = edf.createEventNightLife();
+        event.setName("Test Event Nightlife");
+        event.setVenue(venue);
+        Assert.assertNotNull(dao.insert(event));
+
+        event = edf.createEventNightLife();
+        event.setName("Test Event Nightlife");
+        event.setVenue(venue);
+        Assert.assertNotNull(dao.insert(event));
+
+        List<JpaEventNightlife> events = dao.getForVenue(venue);
+        Assert.assertNotNull(events);
+        Assert.assertTrue(events.size() >= 2);
+
+        for (JpaEventNightlife e : events) {
+            Assert.assertTrue(e.getCategory() == Category.NIGHTLIFE);
+        }
+    }
+}

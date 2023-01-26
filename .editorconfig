@@ -1,0 +1,22 @@
+# Coding style with EditorConfig
+# Plugin for your editor/IDE on http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# General config
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+# Java style
+[*.java]
+# Based on http://www.oracle.com/technetwork/java/index-135089.html
+indent_style = space
+indent_size = 4
+max_line_length = 120
+
+[*.xml]
+indent_style = space
+indent_size = 2

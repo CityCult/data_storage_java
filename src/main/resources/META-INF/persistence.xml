@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+
+  <persistence-unit name="cc_public" transaction-type="RESOURCE_LOCAL">
+    <class>org.citycult.datastorage.entity.JpaEventArtCulture</class>
+    <class>org.citycult.datastorage.entity.JpaEventCinema</class>
+    <class>org.citycult.datastorage.entity.JpaEvent</class>
+    <class>org.citycult.datastorage.entity.JpaEventLive</class>
+    <class>org.citycult.datastorage.entity.JpaMovie</class>
+    <class>org.citycult.datastorage.entity.JpaEventNightlife</class>
+    <class>org.citycult.datastorage.entity.JpaEventSport</class>
+    <class>org.citycult.datastorage.entity.JpaVenue</class>
+
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1/citycult"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <!-- NOTE: Set password for public server. -->
+      <property name="javax.persistence.jdbc.password" value="postgres"/>
+      <!-- native query error: http://www.eclipse.org/forums/index.php/m/885235/ -->
+      <property name="eclipselink.jpa.uppercase-column-names" value="true"/>
+      <!-- PostgreSQL should create IDs with sequence -->
+      <property name="eclipselink.id-validation" value="NULL"/>
+    </properties>
+  </persistence-unit>
+</persistence>
