@@ -16,7 +16,7 @@
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <!-- TODO(cpieloth): Use "db" to use it in docker & webservice. Use localhost for development. -->
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://db/citycult"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://data_storage/citycult"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <!-- NOTE: Set password for public server. -->
       <property name="javax.persistence.jdbc.password" value="postgres"/>

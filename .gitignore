@@ -1,4 +1,9 @@
 ##
+# misc
+#
+build/
+
+##
 # https://github.com/github/gitignore/blob/main/Java.gitignore
 #
 

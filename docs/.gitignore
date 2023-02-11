@@ -1,0 +1,4 @@
+# changelog should be located in project root
+# but Windows does not support symbolic links
+# workaround: tox copies the file to docs/
+../CHANGELOG.md
