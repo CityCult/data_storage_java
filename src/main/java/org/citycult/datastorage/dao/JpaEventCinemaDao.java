@@ -1,6 +1,6 @@
 package org.citycult.datastorage.dao;
 
-import org.citycult.datastorage.dao.helper.JPAEventCategoryDao;
+import org.citycult.datastorage.dao.helper.JpaEventCategoryDao;
 import org.citycult.datastorage.entity.JpaEventCinema;
 import org.citycult.datastorage.entity.JpaMovie;
 import org.citycult.datastorage.entity.JpaVenue;
@@ -33,10 +33,10 @@ public class JpaEventCinemaDao {
 
     private final EntityManagerFactory emf;
 
-    private final JPAEventCategoryDao<JpaEventCinema> dao;
+    private final JpaEventCategoryDao<JpaEventCinema> dao;
 
     private JpaEventCinemaDao() {
-        dao = new JPAEventCategoryDao<>(JpaEventCinema.class, log);
+        dao = new JpaEventCategoryDao<>(JpaEventCinema.class, log);
         emf = JpaEntityDaoFactory.getInstance().getEntityManagerFactory();
     }
 

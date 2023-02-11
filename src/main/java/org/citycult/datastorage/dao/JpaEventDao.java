@@ -1,7 +1,7 @@
 package org.citycult.datastorage.dao;
 
-import org.citycult.datastorage.dao.helper.JPADefaultDao;
-import org.citycult.datastorage.dao.helper.JPAEventDateableDao;
+import org.citycult.datastorage.dao.helper.JpaDefaultDao;
+import org.citycult.datastorage.dao.helper.JpaEventDateableDao;
 import org.citycult.datastorage.entity.JpaEvent;
 import org.citycult.datastorage.entity.JpaVenue;
 import org.citycult.datastorage.util.DateHelper;
@@ -128,7 +128,7 @@ public class JpaEventDao {
         return dateableDao.getDate(start, end);
     }
 
-    private class DefaultDao extends JPADefaultDao<UUID, JpaEvent> {
+    private class DefaultDao extends JpaDefaultDao<UUID, JpaEvent> {
 
         public DefaultDao() {
             super(emf, JpaEvent.class, log);
@@ -143,7 +143,7 @@ public class JpaEventDao {
         }
     }
 
-    private class DateableDao extends JPAEventDateableDao<JpaEvent> {
+    private class DateableDao extends JpaEventDateableDao<JpaEvent> {
 
         public DateableDao() {
             super(emf, JpaEvent.class, log);

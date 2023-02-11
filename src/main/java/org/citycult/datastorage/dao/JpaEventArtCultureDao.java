@@ -1,6 +1,6 @@
 package org.citycult.datastorage.dao;
 
-import org.citycult.datastorage.dao.helper.JPAEventCategoryDao;
+import org.citycult.datastorage.dao.helper.JpaEventCategoryDao;
 import org.citycult.datastorage.entity.JpaEventArtCulture;
 import org.citycult.datastorage.entity.JpaVenue;
 import org.citycult.datastorage.util.DateHelper;
@@ -18,7 +18,7 @@ public class JpaEventArtCultureDao {
 
     private static final Logger log = LoggerFactory.getLogger(JpaEventArtCultureDao.class);
 
-    private final JPAEventCategoryDao<JpaEventArtCulture> dao;
+    private final JpaEventCategoryDao<JpaEventArtCulture> dao;
 
     private static final JpaEventArtCultureDao instance = new JpaEventArtCultureDao();
 
@@ -27,7 +27,7 @@ public class JpaEventArtCultureDao {
     }
 
     private JpaEventArtCultureDao() {
-        dao = new JPAEventCategoryDao<JpaEventArtCulture>(JpaEventArtCulture.class, log);
+        dao = new JpaEventCategoryDao<JpaEventArtCulture>(JpaEventArtCulture.class, log);
     }
 
     public JpaEventArtCulture get(UUID uid) {

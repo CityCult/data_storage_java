@@ -20,11 +20,11 @@ import java.util.UUID;
 /**
  * @author cpieloth
  */
-public class JPAEventCategoryDao<EVENT extends JpaEvent> {
+public class JpaEventCategoryDao<EVENT extends JpaEvent> {
 
     private final Logger log;
 
-    private final JPADefaultDao<UUID, EVENT> defaultDAO;
+    private final JpaDefaultDao<UUID, EVENT> defaultDAO;
 
     private final DateableDAO dateableDAO;
 
@@ -32,7 +32,7 @@ public class JPAEventCategoryDao<EVENT extends JpaEvent> {
 
     private final Category cat;
 
-    public JPAEventCategoryDao(Class<? extends EVENT> clazz, Logger log) {
+    public JpaEventCategoryDao(Class<? extends EVENT> clazz, Logger log) {
         this.log = log;
         this.cat = JpaEventClassHelper.getCategory(clazz);
         emf = JpaEntityDaoFactory.getInstance().getEntityManagerFactory();
@@ -130,7 +130,7 @@ public class JPAEventCategoryDao<EVENT extends JpaEvent> {
         return dateableDAO.getDate(start, end);
     }
 
-    private class DefaultDAO extends JPADefaultDao<UUID, EVENT> {
+    private class DefaultDAO extends JpaDefaultDao<UUID, EVENT> {
 
         public DefaultDAO(Class<? extends EVENT> clazz) {
             super(emf, clazz, log);
@@ -145,7 +145,7 @@ public class JPAEventCategoryDao<EVENT extends JpaEvent> {
         }
     }
 
-    private class DateableDAO extends JPAEventDateableDao<EVENT> {
+    private class DateableDAO extends JpaEventDateableDao<EVENT> {
 
         public DateableDAO(Class<? extends EVENT> clazz) {
             super(emf, clazz, log);

@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class JPADefaultDao<I, T> {
+public abstract class JpaDefaultDao<I, T> {
 
     private final Logger log;
 
@@ -17,7 +17,7 @@ public abstract class JPADefaultDao<I, T> {
 
     private final EntityManagerFactory emf;
 
-    public JPADefaultDao(EntityManagerFactory emf, Class<? extends T> clazz, Logger log) {
+    public JpaDefaultDao(EntityManagerFactory emf, Class<? extends T> clazz, Logger log) {
         this.emf = emf;
         this.clazz = clazz;
         this.log = log;

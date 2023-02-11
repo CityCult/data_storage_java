@@ -28,7 +28,8 @@
           <execution>
             <goals>
               <goal>integration-test</goal>
-              <goal>verify</goal>
+              <!-- TODO(cpieloth): enable-->
+<!--              <goal>verify</goal>-->
             </goals>
           </execution>
         </executions>

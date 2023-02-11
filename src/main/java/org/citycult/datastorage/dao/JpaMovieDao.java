@@ -1,6 +1,6 @@
 package org.citycult.datastorage.dao;
 
-import org.citycult.datastorage.dao.helper.JPADefaultDao;
+import org.citycult.datastorage.dao.helper.JpaDefaultDao;
 import org.citycult.datastorage.entity.JpaMovie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +52,7 @@ public class JpaMovieDao {
         return defaultDao.delete(obj);
     }
 
-    private class DefaultDao extends JPADefaultDao<UUID, JpaMovie> {
+    private class DefaultDao extends JpaDefaultDao<UUID, JpaMovie> {
 
         public DefaultDao() {
             super(emf, JpaMovie.class, log);

@@ -1,7 +1,7 @@
 package org.citycult.datastorage.dao;
 
 import org.citycult.datastorage.entity.Category;
-import org.citycult.datastorage.dao.helper.JPADefaultDao;
+import org.citycult.datastorage.dao.helper.JpaDefaultDao;
 import org.citycult.datastorage.entity.JpaMovie;
 import org.citycult.datastorage.entity.JpaVenue;
 import org.citycult.datastorage.util.SqlHelper;
@@ -177,7 +177,7 @@ public class JpaVenueDao {
         return defaultDao.delete(obj);
     }
 
-    private class DefaultDao extends JPADefaultDao<UUID, JpaVenue> {
+    private class DefaultDao extends JpaDefaultDao<UUID, JpaVenue> {
 
         public DefaultDao() {
             super(emf, JpaVenue.class, log);
