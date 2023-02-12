@@ -1,8 +1,8 @@
 package org.citycult.datastorage.dao;
 
-import junit.framework.Assert;
 import org.citycult.datastorage.entity.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -24,18 +24,18 @@ public class JpaEventDaoIT {
         venue = edf.createVenue();
         venue.setName("Test Venue1");
         event.setVenue(venue);
-        Assert.assertNotNull(dao.insert(event));
+        Assertions.assertNotNull(dao.insert(event));
 
         event = edf.createEvent(Category.NIGHTLIFE);
         event.setName("Test Event2");
         venue = edf.createVenue();
         venue.setName("Test Venue2");
         event.setVenue(venue);
-        Assert.assertNotNull(dao.insert(event));
+        Assertions.assertNotNull(dao.insert(event));
 
         List<JpaEvent> events = dao.getAll();
-        Assert.assertNotNull(events);
-        Assert.assertTrue(events.size() >= 2);
+        Assertions.assertNotNull(events);
+        Assertions.assertTrue(events.size() >= 2);
     }
 
     @Test
@@ -49,11 +49,11 @@ public class JpaEventDaoIT {
         venue.setName("Test Venue");
         event.setVenue(venue);
 
-        Assert.assertNotNull(dao.insert(event));
+        Assertions.assertNotNull(dao.insert(event));
 
         List<JpaEvent> finds = dao.find(event);
-        Assert.assertNotNull(finds);
-        Assert.assertTrue(finds.size() == 1);
+        Assertions.assertNotNull(finds);
+        Assertions.assertEquals(1, finds.size());
     }
 
     @Test
@@ -64,14 +64,14 @@ public class JpaEventDaoIT {
         event = edf.createEvent(Category.ARTCULTURE);
         event.setName("Test Event");
 
-        Assert.assertNull(dao.insert(event)); // no venue!
+        Assertions.assertNull(dao.insert(event)); // no venue!
 
         venue = edf.createVenue();
         venue.setName("Test Venue");
         event.setVenue(venue);
 
-        Assert.assertNotNull(dao.insert(event));
-        Assert.assertNotNull(dao.get(event.getEventUid()));
+        Assertions.assertNotNull(dao.insert(event));
+        Assertions.assertNotNull(dao.get(event.getEventUid()));
 
         // Check cinema with no movie
         event = edf.createEvent(Category.CINEMA);
@@ -81,8 +81,8 @@ public class JpaEventDaoIT {
         venue.setName("Test Venue Cinema");
         event.setVenue(venue);
 
-        Assert.assertNotNull(dao.insert(event));
-        Assert.assertNotNull(dao.get(event.getEventUid()));
+        Assertions.assertNotNull(dao.insert(event));
+        Assertions.assertNotNull(dao.get(event.getEventUid()));
 
         // Check cinema with movie
         JpaEventCinema cinema = edf.createEventCinema();
@@ -95,10 +95,10 @@ public class JpaEventDaoIT {
         venue.setName("Test Venue Cinema");
         cinema.setVenue(venue);
 
-        Assert.assertNotNull(dao.insert(cinema));
+        Assertions.assertNotNull(dao.insert(cinema));
 
         event = dao.get(event.getEventUid());
-        Assert.assertNotNull(event);
+        Assertions.assertNotNull(event);
     }
 
     @Test
@@ -112,16 +112,16 @@ public class JpaEventDaoIT {
         venue.setName("Test Venue");
         event.setVenue(venue);
 
-        Assert.assertNotNull(dao.insert(event));
+        Assertions.assertNotNull(dao.insert(event));
 
         final String newName = event.getName() + " UPDATED";
         event.setName(newName);
 
-        Assert.assertNotNull(dao.update(event));
+        Assertions.assertNotNull(dao.update(event));
 
         event = dao.get(event.getEventUid());
-        Assert.assertNotNull(event);
-        Assert.assertEquals(newName, event.getName());
+        Assertions.assertNotNull(event);
+        Assertions.assertEquals(newName, event.getName());
     }
 
     @Test
@@ -135,13 +135,13 @@ public class JpaEventDaoIT {
         venue.setName("Test Venue Cinema");
         event.setVenue(venue);
 
-        Assert.assertNotNull(dao.insert(event));
+        Assertions.assertNotNull(dao.insert(event));
         event = dao.get(event.getEventUid());
-        Assert.assertNotNull(event);
+        Assertions.assertNotNull(event);
 
-        Assert.assertTrue(dao.delete(event));
+        Assertions.assertTrue(dao.delete(event));
         event = dao.get(event.getEventUid());
-        Assert.assertNull(event);
+        Assertions.assertNull(event);
     }
 
     @Test
@@ -154,18 +154,18 @@ public class JpaEventDaoIT {
         event = edf.createEvent(Category.LIVE);
         event.setName("Test Event Live");
         event.setVenue(venue);
-        Assert.assertNotNull(dao.insert(event));
+        Assertions.assertNotNull(dao.insert(event));
 
         event = edf.createEvent(Category.CINEMA);
         event.setName("Test Event Cinema");
         event.setVenue(venue);
-        Assert.assertNotNull(dao.insert(event));
+        Assertions.assertNotNull(dao.insert(event));
 
         List<JpaEvent> events = dao.getForVenue(venue);
-        Assert.assertNotNull(events);
-        Assert.assertTrue(events.size() >= 2);
+        Assertions.assertNotNull(events);
+        Assertions.assertTrue(events.size() >= 2);
 
         event = dao.get(event.getEventUid());
-        Assert.assertNotNull(event);
+        Assertions.assertNotNull(event);
     }
 }

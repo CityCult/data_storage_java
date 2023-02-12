@@ -1,9 +1,9 @@
 package org.citycult.datastorage.dao;
 
-import junit.framework.Assert;
 import org.citycult.datastorage.entity.JpaEntityFactory;
 import org.citycult.datastorage.entity.JpaVenue;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -22,15 +22,15 @@ public class JpaVenueDaoIT {
 
         entity = edf.createVenue();
         entity.setName(base_name + " 1");
-        Assert.assertNotNull(dao.insert(entity));
+        Assertions.assertNotNull(dao.insert(entity));
 
         entity = edf.createVenue();
         entity.setName(base_name + " 2");
-        Assert.assertNotNull(dao.insert(entity));
+        Assertions.assertNotNull(dao.insert(entity));
 
         List<JpaVenue> entities = dao.getAll();
-        Assert.assertNotNull(entities);
-        Assert.assertTrue(entities.size() >= 2);
+        Assertions.assertNotNull(entities);
+        Assertions.assertTrue(entities.size() >= 2);
     }
 
     @Test
@@ -39,11 +39,11 @@ public class JpaVenueDaoIT {
 
         entity = edf.createVenue();
         entity.setName(base_name);
-        Assert.assertNotNull(dao.insert(entity));
+        Assertions.assertNotNull(dao.insert(entity));
 
         List<JpaVenue> finds = dao.find(entity);
-        Assert.assertNotNull(finds);
-        Assert.assertTrue(finds.size() == 1);
+        Assertions.assertNotNull(finds);
+        Assertions.assertEquals(1, finds.size());
     }
 
     @Test
@@ -53,8 +53,8 @@ public class JpaVenueDaoIT {
         entity = edf.createVenue();
         entity.setName(base_name);
 
-        Assert.assertNotNull(dao.insert(entity));
-        Assert.assertNotNull(dao.get(entity.getVenueUid()));
+        Assertions.assertNotNull(dao.insert(entity));
+        Assertions.assertNotNull(dao.get(entity.getVenueUid()));
     }
 
     @Test
@@ -64,16 +64,16 @@ public class JpaVenueDaoIT {
         venue = edf.createVenue();
         venue.setName(base_name);
 
-        Assert.assertNotNull(dao.insert(venue));
+        Assertions.assertNotNull(dao.insert(venue));
 
         final String new_name = venue.getName() + " UPDATED";
         venue.setName(new_name);
 
-        Assert.assertNotNull(dao.update(venue));
+        Assertions.assertNotNull(dao.update(venue));
 
         venue = dao.get(venue.getVenueUid());
-        Assert.assertNotNull(venue);
-        Assert.assertEquals(new_name, venue.getName());
+        Assertions.assertNotNull(venue);
+        Assertions.assertEquals(new_name, venue.getName());
     }
 
     @Test
@@ -83,12 +83,12 @@ public class JpaVenueDaoIT {
         entity = edf.createVenue();
         entity.setName(base_name);
 
-        Assert.assertNotNull(dao.insert(entity));
+        Assertions.assertNotNull(dao.insert(entity));
         entity = dao.get(entity.getVenueUid());
-        Assert.assertNotNull(entity);
+        Assertions.assertNotNull(entity);
 
-        Assert.assertTrue(dao.delete(entity));
+        Assertions.assertTrue(dao.delete(entity));
         entity = dao.get(entity.getVenueUid());
-        Assert.assertNull(entity);
+        Assertions.assertNull(entity);
     }
 }

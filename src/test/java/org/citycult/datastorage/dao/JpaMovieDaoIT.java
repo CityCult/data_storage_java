@@ -1,9 +1,9 @@
 package org.citycult.datastorage.dao;
 
-import junit.framework.Assert;
 import org.citycult.datastorage.entity.JpaEntityFactory;
 import org.citycult.datastorage.entity.JpaMovie;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -22,15 +22,15 @@ public class JpaMovieDaoIT {
 
         entity = edf.createMovie();
         entity.setTitle(base_name + " 1");
-        Assert.assertNotNull(dao.insert(entity));
+        Assertions.assertNotNull(dao.insert(entity));
 
         entity = edf.createMovie();
         entity.setTitle(base_name + " 2");
-        Assert.assertNotNull(dao.insert(entity));
+        Assertions.assertNotNull(dao.insert(entity));
 
         List<JpaMovie> entities = dao.getAll();
-        Assert.assertNotNull(entities);
-        Assert.assertTrue(entities.size() >= 2);
+        Assertions.assertNotNull(entities);
+        Assertions.assertTrue(entities.size() >= 2);
     }
 
     @Test
@@ -39,11 +39,11 @@ public class JpaMovieDaoIT {
 
         entity = edf.createMovie();
         entity.setTitle(base_name);
-        Assert.assertNotNull(dao.insert(entity));
+        Assertions.assertNotNull(dao.insert(entity));
 
         List<JpaMovie> finds = dao.find(entity);
-        Assert.assertNotNull(finds);
-        Assert.assertTrue(finds.size() == 1);
+        Assertions.assertNotNull(finds);
+        Assertions.assertEquals(1, finds.size());
     }
 
     @Test
@@ -53,8 +53,8 @@ public class JpaMovieDaoIT {
         entity = edf.createMovie();
         entity.setTitle(base_name);
 
-        Assert.assertNotNull(dao.insert(entity));
-        Assert.assertNotNull(dao.get(entity.getMovieUid()));
+        Assertions.assertNotNull(dao.insert(entity));
+        Assertions.assertNotNull(dao.get(entity.getMovieUid()));
     }
 
     @Test
@@ -64,16 +64,16 @@ public class JpaMovieDaoIT {
         entity = edf.createMovie();
         entity.setTitle(base_name);
 
-        Assert.assertNotNull(dao.insert(entity));
+        Assertions.assertNotNull(dao.insert(entity));
 
         final String new_name = entity.getTitle() + " UPDATED";
         entity.setTitle(new_name);
 
-        Assert.assertNotNull(dao.update(entity));
+        Assertions.assertNotNull(dao.update(entity));
 
         entity = dao.get(entity.getMovieUid());
-        Assert.assertNotNull(entity);
-        Assert.assertEquals(new_name, entity.getTitle());
+        Assertions.assertNotNull(entity);
+        Assertions.assertEquals(new_name, entity.getTitle());
     }
 
     @Test
@@ -83,12 +83,12 @@ public class JpaMovieDaoIT {
         entity = edf.createMovie();
         entity.setTitle(base_name);
 
-        Assert.assertNotNull(dao.insert(entity));
+        Assertions.assertNotNull(dao.insert(entity));
         entity = dao.get(entity.getMovieUid());
-        Assert.assertNotNull(entity);
+        Assertions.assertNotNull(entity);
 
-        Assert.assertTrue(dao.delete(entity));
+        Assertions.assertTrue(dao.delete(entity));
         entity = dao.get(entity.getMovieUid());
-        Assert.assertNull(entity);
+        Assertions.assertNull(entity);
     }
 }

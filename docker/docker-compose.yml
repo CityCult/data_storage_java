@@ -1,0 +1,28 @@
+##
+# Usage: 
+#     $ docker-compose up
+#     $ docker-compose --profile debug up  # starts with adminer
+#     $ docker-compose down
+#
+version: '3.1'
+
+services:
+
+  data_storage:
+    image: cc_data_storage:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: citycult
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer:4.8.1
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+     - "data_storage"
+    profiles:
+      - debug

@@ -1,8 +1,7 @@
 package org.citycult.datastorage.util;
 
-import org.citycult.datastorage.util.DateHelper;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -52,9 +51,9 @@ public class DateHelperTest {
 
     private void compare(Date date, Date dateExp) {
         if (date == null || dateExp == null)
-            Assert.fail("date or dateExp is null!");
+            Assertions.fail("date or dateExp is null!");
         if (date.getTime() != dateExp.getTime()) {
-            Assert.fail("Wrong date parsed! " + date.toString() + " != "
+            Assertions.fail("Wrong date parsed! " + date.toString() + " != "
                     + dateExp.toString());
         }
     }
@@ -144,7 +143,7 @@ public class DateHelperTest {
                 getDate(1970, Calendar.JANUARY, 1));
 
         if (!date.equals(dateExp)) {
-            Assert.fail("Wrong date parsed! " + date.toString() + " != "
+            Assertions.fail("Wrong date parsed! " + date.toString() + " != "
                     + dateExp.toString());
         }
     }
